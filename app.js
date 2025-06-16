@@ -1,6 +1,6 @@
 async function callGuruMode(prompt, mode) {
   const output = document.getElementById("output");
-  output.innerText = "🕐 Generating response...";
+  output.innerText = "⏳ Asking Ultimate Torah Engine...";
 
   try {
     const res = await fetch("https://uta-gpt4-proxy.vercel.app/api/ask", {
@@ -11,10 +11,24 @@ async function callGuruMode(prompt, mode) {
       body: JSON.stringify({ prompt, mode })
     });
 
-    const data = await res.json();
-    output.innerText = res.ok ? data.result : `❌ Error: ${data.error || "Unknown error"}`;
+    const text = await res.text(); // Read raw response body
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch (e) {
+      output.innerText = `❌ Could not parse JSON:\n\n${text}`;
+      return;
+    }
+
+    if (!res.ok) {
+      output.innerText = `❌ API Error (${res.status}):\n\n${JSON.stringify(data, null, 2)}`;
+      return;
+    }
+
+    output.innerText = JSON.stringify(data, null, 2); // Show OpenAI raw output
+
   } catch (err) {
-    output.innerText = "❌ Request failed. Please try again.";
+    output.innerText = `❌ Fetch failed:\n${err.message}`;
   }
 }
 
