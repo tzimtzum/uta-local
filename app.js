@@ -1,4 +1,4 @@
-const OPENAI_API_KEY = 'sk-REPLACE_THIS_WITH_YOURS';
+const OPENAI_API_KEY = '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';
 
 async function callGuruMode(prompt, type) {
   const output = document.getElementById('output');
