@@ -42,25 +42,18 @@
   <button onclick="generate('source')">Generate Source Sheet</button>
   <button onclick="generate('audio')">Generate Audio Shiur</button>
   <div class="output" id="output">Output will appear here...</div>
-
+                              
+<script src="app.js"></script>
   <script>
     function generate(type) {
-      const prompt = document.getElementById('prompt').value.trim();
-      const output = document.getElementById('output');
-      if (!prompt) {
-        output.innerText = "Please enter a Torah topic first.";
-        return;
-      }
-
-      const sampleResponses = {
-        shiur: `Shiur on: "${prompt}"\n\nThis shiur explores key Torah sources and halachic discussions around the topic.`,
-        chart: `Chart for: "${prompt}"\n\n- Source 1\n- Source 2\n- Halachic split\n- Conceptual breakdown`,
-        source: `Source Sheet: "${prompt}"\n\n1. פסוק X\n2. גמרא X\n3. רמב"ם X\n4. משנה ברורה X`,
-        audio: `Audio Placeholder: Simulating an audio shiur on "${prompt}"... 🎙️ (Feature coming soon)`
-      };
-
-      output.innerText = sampleResponses[type] || "Unknown output type.";
+    const prompt = document.getElementById('prompt').value.trim();
+    if (!prompt) {
+      document.getElementById('output').innerText = "Please enter a Torah topic first.";
+      return;
     }
+    callGuruMode(prompt, type);
+  }
+
   </script>
 </body>
 </html>
