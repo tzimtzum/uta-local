@@ -6,53 +6,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: sans-serif;
-      max-width: 600px;
+      font-family: 'Arial', sans-serif;
+      max-width: 900px;
       margin: 2rem auto;
       padding: 1rem;
+      background-color: #f6f6f6;
     }
     h1 {
       text-align: center;
+      font-size: 2rem;
+    }
+    label, select {
+      font-weight: bold;
+      display: block;
+      margin-top: 1rem;
     }
     textarea {
       width: 100%;
-      height: 100px;
+      height: 150px;
       margin-bottom: 1rem;
+      font-family: 'Courier New', monospace;
+      direction: rtl;
     }
     button {
-      padding: 10px 20px;
+      padding: 10px;
       margin: 5px 0;
       width: 100%;
       font-size: 1rem;
+      background-color: #003366;
+      color: white;
+      border: none;
+      border-radius: 5px;
     }
     .output {
       margin-top: 1rem;
       padding: 1rem;
       border: 1px solid #ccc;
-      background: #f9f9f9;
+      background: white;
       white-space: pre-wrap;
+      direction: rtl;
+      font-size: 1rem;
     }
   </style>
 </head>
 <body>
   <h1>Ultimate Torah Assistant</h1>
-  <textarea id="prompt" placeholder="Enter your Torah question or topic..."></textarea>
-  <button onclick="generate('shiur')">Generate Shiur</button>
-  <button onclick="generate('chart')">Generate Chart</button>
-  <button onclick="generate('source')">Generate Source Sheet</button>
-  <button onclick="generate('audio')">Generate Audio Shiur</button>
+
+  <label for="mode">Choose Mode:</label>
+  <select id="mode">
+    <option value="shiur">Shiur Developer</option>
+    <option value="chart">Chart Builder</option>
+    <option value="source">Source Sheet</option>
+    <option value="audio">Audio Shiur Script</option>
+    <option value="chavruta">Chavruta Mode</option>
+    <option value="quick">Quick Question</option>
+  </select>
+
+  <textarea id="prompt" placeholder="e.g., Break down Likutei Torah on Parshat Shelach or Create a shiur on Shabbat with Brisker chakira"></textarea>
+  <button onclick="generate()">Generate with Guru Mode</button>
+
   <div class="output" id="output">Output will appear here...</div>
-                              
-<script src="app.js"></script>
-  <script>
-    function generate(type) {
-    const prompt = document.getElementById('prompt').value.trim();
-    if (!prompt) {
-      document.getElementById('output').innerText = "Please enter a Torah topic first.";
-      return;
-    }
-    callGuruMode(prompt, type);
-  }
+
+  <script src="app.js"></script>
+</body>
+</html>
+
 
   </script>
 </body>
