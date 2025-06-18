@@ -24,7 +24,7 @@ async function generate() {
       : (data.text || "⚠️ English not found.").replace(/<[^>]+>/g, '');
 
     outputDiv.innerHTML = `
-  <h3>${ref} (Cleaned)</h3>
+  <h3>${ref}</h3>
   <button onclick="addToSourceSheet('${ref}', \`${hebrew}\`, \`${english}\`)">➕ Add to Source Sheet</button>
   <div style="margin-top: 1rem">
     <div style="text-align: right; direction: rtl;">
