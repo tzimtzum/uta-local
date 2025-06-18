@@ -24,13 +24,19 @@ async function generate() {
       : (data.text || "⚠️ English not found.").replace(/<[^>]+>/g, '');
 
     outputDiv.innerHTML = `
-      <h3>${ref} (Cleaned)</h3>
-      <button onclick="addToSourceSheet('${ref}', \`${hebrew}\`, \`${english}\`)">➕ Add to Source Sheet</button>
-      <div style="margin-top: 1rem">
-        <strong>Hebrew:</strong><br>${hebrew}<br><br>
-        <strong>English:</strong><br>${english}
-      </div>
-    `;
+  <h3>${ref} (Cleaned)</h3>
+  <button onclick="addToSourceSheet('${ref}', \`${hebrew}\`, \`${english}\`)">➕ Add to Source Sheet</button>
+  <div style="margin-top: 1rem">
+    <div style="text-align: right; direction: rtl;">
+      <strong>Hebrew:</strong><br>${hebrew}
+    </div>
+    <br>
+    <div style="text-align: left; direction: ltr;">
+      <strong>English:</strong><br>${english}
+    </div>
+  </div>
+`;
+
   } catch (err) {
     console.error("❌ Error fetching Sefaria data:", err);
     outputDiv.textContent = "Error loading from Sefaria.";
