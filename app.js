@@ -1,21 +1,23 @@
 async function generate() {
   const outputDiv = document.getElementById('output');
-  outputDiv.textContent = 'Loading...';
+  outputDiv.innerHTML = 'Loading...';
 
   try {
-    const ref = 'Vayikra 1:1';
+    const ref = 'Vayikra 1:1';  // For test, you can later change this to dynamic input
     const url = `https://www.sefaria.org/api/texts/${encodeURIComponent(ref)}?context=0&commentary=0&pad=0`;
 
     const response = await fetch(url);
     const data = await response.json();
 
-    const hebrew = data.he || "Hebrew text not found.";
-    const english = data.text || "English translation not found.";
+    const hebrewText = Array.isArray(data.he) ? data.he.join('<br>') : data.he;
+    const englishText = Array.isArray(data.text) ? data.text.join('<br>') : data.text;
 
-    outputDiv.innerHTML =
-      `<strong>Hebrew:</strong><br>${hebrew.join('<br>')}<br><br><strong>English:</strong><br>${english.join('<br>')}`;
-  } catch (err) {
-    console.error(err);
-    outputDiv.textContent = 'Error loading text. Please check console.';
+    outputDiv.innerHTML = `
+      <strong>Hebrew:</strong><br>${hebrewText}<br><br>
+      <strong>English:</strong><br>${englishText}
+    `;
+  } catch (error) {
+    console.error('Fetch error:', error);
+    outputDiv.textContent = 'Failed to load text.';
   }
 }
